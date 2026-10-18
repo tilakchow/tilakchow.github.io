@@ -1,0 +1,65 @@
+.footer {
+  margin-top: 40px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  border-top: 1px solid #232326;
+  font-family: Figtree, sans-serif;
+}
+
+.footer-quote {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #71767b;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.footer-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: #71767b;
+}
+
+.footer-attribution {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  background: #141719;
+  border: 1px solid #232326;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #b3b3b3;
+}
+
+.footer-clock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #02ff67;
+  box-shadow: 0 0 6px #02ff67;
+  display: inline-block;
+}
+
+.footer-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-github-link:hover {
+  color: #ffffff;
+}
