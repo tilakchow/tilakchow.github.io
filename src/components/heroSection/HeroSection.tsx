@@ -182,8 +182,9 @@ export const HeroSection: React.FC = () => {
               <li className="about-bio-item">
                 <span className="about-bio-marker" />
                 <span>
-                  Published and presented research on an{' '}
-                  <span className="bio-highlight">IoT-Based Driver Alertness System</span> at the ICISAS 2025 Conference, Dubai.
+                  Focused on building{' '}
+                  <span className="bio-highlight">autonomous AI agents</span>,{' '}
+                  <span className="bio-highlight">hybrid RAG pipelines</span>, and fine-tuned LLM workflows with vector databases & evaluation frameworks.
                 </span>
               </li>
             </ul>
