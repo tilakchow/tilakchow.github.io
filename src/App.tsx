@@ -5,7 +5,6 @@ import { HeroSection } from './components/heroSection/HeroSection';
 import { SkillSection } from './components/skillSection/SkillSection';
 import { Experience } from './components/experience/Experience';
 import { Projects } from './components/projects/Projects';
-import { UsesTeaser } from './components/uses/UsesTeaser';
 import { ContactMeSection } from './components/contactMe/ContactMe';
 import { Footer } from './components/footer/Footer';
 import { SearchModal } from './components/search/SearchModal';
@@ -16,7 +15,6 @@ import './App.css';
 // Lazy-loaded routes matching Manish's architecture
 const ProjectsLayout = lazy(() => import('./pages/ProjectsLayout'));
 const ResumeLayout = lazy(() => import('./pages/ResumeLayout'));
-const UsesLayout = lazy(() => import('./pages/UsesLayout'));
 
 const Home: React.FC = () => {
   return (
@@ -25,7 +23,6 @@ const Home: React.FC = () => {
       <SkillSection />
       <Experience />
       <Projects />
-      <UsesTeaser />
       <ContactMeSection />
       <Footer />
     </div>
@@ -69,7 +66,6 @@ export const AppContent: React.FC = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/projects" element={<ProjectsLayout />} />
           <Route path="/resume" element={<ResumeLayout />} />
-          <Route path="/uses" element={<UsesLayout />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </Suspense>

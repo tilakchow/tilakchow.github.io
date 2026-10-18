@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SectionTitle } from '../common/Common';
 import { FaChevronDown, FaBriefcase, FaExternalLinkAlt } from 'react-icons/fa';
+import { GitHubCalendar } from '../calendar/Calendar';
 
 interface ExpLink {
   url: string;
@@ -161,6 +162,9 @@ export const Experience: React.FC = () => {
             onToggle={() => setExpandedId(expandedId === 2 ? null : 2)}
           />
         </div>
+
+        {/* GitHub Contributions Heatmap */}
+        <GitHubCalendar username="tilakchow" />
       </section>
     </div>
   );

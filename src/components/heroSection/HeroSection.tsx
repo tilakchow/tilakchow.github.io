@@ -135,22 +135,15 @@ export const HeroSection: React.FC = () => {
               <span
                 className="availability-text"
                 style={{
-                  cursor: 'pointer',
-                  fontWeight: '700',
-                  color: '#fff',
-                  textDecoration: 'underline',
-                  fontSize: '1em',
+                  fontWeight: '600',
+                  color: '#ffffff',
+                  fontSize: '0.95rem',
                   marginLeft: 4,
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
               >
-                <Tooltip
-                  text="Building Intelligent GenAI, LangChain & Advanced RAG Systems"
-                  position="bottom"
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    Building GenAI Solutions
-                  </span>
-                </Tooltip>
+                AI Engineer
               </span>
             </div>
 
@@ -230,8 +223,7 @@ export const HeroSection: React.FC = () => {
               <div className="discord-invite-middle">
                 <span className="discord-server-name">Tilak Chowdary</span>
                 <span className="discord-server-stats">
-                  <span className="discord-online-dot" />
-                  <span>AI Engineer • LinkedIn</span>
+                  <span>AI Engineer</span>
                 </span>
               </div>
               <div className="discord-invite-right">

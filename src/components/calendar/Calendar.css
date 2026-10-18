@@ -1,0 +1,108 @@
+.calendar-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px 18px;
+  background: transparent;
+  border: 1.5px dashed #444;
+  font-family: Figtree, sans-serif;
+  overflow-x: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.calendar-container:hover {
+  border: 1.5px dashed #888888;
+}
+
+.calendar-container::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-container * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.calendar-scroll-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+}
+
+.calendar-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-svg {
+  display: block;
+  overflow: visible;
+}
+
+.calendar-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-family: Figtree, sans-serif;
+  color: #fff;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.calendar-count {
+  font-weight: 500;
+  color: #d4d4d4;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #fff;
+  margin-left: auto;
+}
+
+.calendar-legend-label {
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.calendar-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.calendar-tooltip {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  background-color: #262626;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: Figtree, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #444;
+}
+
+@media (max-width: 700px) {
+  .calendar-container {
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .calendar-container {
+    margin: 12px auto;
+    padding: 12px 16px;
+  }
+}

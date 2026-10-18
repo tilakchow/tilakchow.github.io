@@ -1,7 +1,6 @@
 import { SearchItem } from '../types/search';
 import { allProjects } from './projects';
 import { skillsData } from './skills';
-import { usesData } from './uses';
 
 export const navigationItems: SearchItem[] = [
   {
@@ -27,14 +26,6 @@ export const navigationItems: SearchItem[] = [
     category: 'navigation',
     url: '#skills',
     tags: ['languages', 'technologies', 'expertise', 'stack'],
-  },
-  {
-    id: 'nav-uses',
-    title: 'Uses & Gear',
-    description: 'Hardware setup, software tools, shell environment, and editor config',
-    category: 'navigation',
-    url: '#uses',
-    tags: ['setup', 'hardware', 'software', 'tools', 'specs'],
   },
   {
     id: 'nav-resume',
@@ -81,21 +72,6 @@ export function buildSearchIndex(): SearchItem[] {
         category: 'skills',
         tags: [cat.category, skill.level, 'tech', 'skill'],
         url: '#skills',
-      });
-    });
-  });
-
-  // Index uses
-  usesData.forEach((cat) => {
-    cat.items.forEach((item, idx) => {
-      items.push({
-        id: `uses-${idx}-${item.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
-        title: item.name,
-        description: `${item.label} (${cat.category})${item.desc ? ` - ${item.desc}` : ''}`,
-        category: 'uses',
-        tags: [item.label, cat.category, 'tool', 'hardware', 'setup'],
-        url: item.link || '#uses',
-        external: Boolean(item.link),
       });
     });
   });

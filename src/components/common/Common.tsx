@@ -26,21 +26,14 @@ export const SectionTitle: React.FC<{ children: ReactNode; className?: string }>
   className = '',
 }) => {
   return (
-    <div className={`section-title-wrapper ${className}`} style={{ marginBottom: '24px' }}>
-      <h2
-        style={{
-          fontFamily: 'Figtree, sans-serif',
-          fontSize: '1.25rem',
-          fontWeight: 600,
-          color: '#ffffff',
-          letterSpacing: '-0.02em',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+    <div className={`section-title-wrapper ${className}`} style={{ marginBottom: '16px' }}>
+      <div className="card-title">
+        <span className="corner top left"></span>
+        <span className="corner top right"></span>
+        <span className="corner bottom left"></span>
+        <span className="corner bottom right"></span>
         {children}
-      </h2>
+      </div>
     </div>
   );
 };
