@@ -43,7 +43,7 @@ export const HeroSection: React.FC = () => {
     setShowQr((prev) => !prev);
   };
 
-  const avatarUrl = '/avatar.png';
+  const avatarUrl = '/images/profile/avatar.png';
   // Generates clean email QR code matching Manixh dimensions & style (black QR dots on crisp white rounded card)
   const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto:tilakchowdary18@gmail.com&color=000000&bgcolor=ffffff';
 

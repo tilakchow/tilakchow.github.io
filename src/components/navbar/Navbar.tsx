@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
               aria-label="Star this portfolio on GitHub"
             >
               <img
-                src="/images/star.png"
+                src="/images/branding/star.png"
                 alt=""
                 className="navbar-star-icon"
                 style={{ width: '16px', height: '16px', objectFit: 'contain' }}

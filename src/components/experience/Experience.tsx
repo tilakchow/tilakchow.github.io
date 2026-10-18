@@ -135,7 +135,7 @@ export const Experience: React.FC = () => {
             role="AI Engineer"
             dates="Jan 2026 - Present"
             status="present"
-            logoUrl="/edusync.jpg"
+            logoUrl="/images/companies/edusync.jpg"
             links={[{ url: 'https://edusync.in' }]}
             description={[
               'Conducting rigorous validation and stress-testing of AI-integrated ERP modules, specifically LLM-powered workflows, identifying critical edge cases and reducing pre-release defects.',
@@ -152,7 +152,7 @@ export const Experience: React.FC = () => {
             role="AI & ML Intern"
             dates="Feb 2025 - May 2025"
             status="past"
-            logoUrl="/airobosoft.jpg"
+            logoUrl="/images/companies/airobosoft.jpg"
             links={[{ url: 'https://airobosoft.com' }]}
             description={[
               'Built a Python-based conversational chatbot using NLP preprocessing techniques for real-time user interactions.',

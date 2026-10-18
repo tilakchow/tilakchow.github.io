@@ -1,6 +1,6 @@
 export const userImages = {
   profile: {
-    avatar: '/avatar.jpg',
+    avatar: '/images/profile/avatar.jpg',
     qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=mailto:tilakchowdary18@gmail.com',
   },
   projects: {
