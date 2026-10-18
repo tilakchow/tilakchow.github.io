@@ -4,7 +4,7 @@ import { FaHeart } from 'react-icons/fa';
 import { LuMapPin } from 'react-icons/lu';
 import { HiUser, HiQrCode } from 'react-icons/hi2';
 import { FaXTwitter } from 'react-icons/fa6';
-import { FaFilePdf, FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
 import { socialLinks } from '../../data/socialLinks';
 
 // Time clock component
@@ -257,20 +257,6 @@ export const HeroSection: React.FC = () => {
                   </svg>
                   Email Me
                 </button>
-              </a>
-            </Tooltip>
-
-            {/* Direct Resume Download Button */}
-            <Tooltip text="View / Download AI Engineer Resume" position="top">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-btn"
-                style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
-              >
-                <FaFilePdf size={13} style={{ marginRight: '6px', color: '#f59e0b' }} />
-                Resume
               </a>
             </Tooltip>
 
