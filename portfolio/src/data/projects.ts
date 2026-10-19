@@ -29,6 +29,14 @@ export const featuredProjects: ProjectData[] = [
     bannerBg: '#090d16',
   },
   {
+    name: 'Enterprise RAG Chatbot',
+    desc: 'RAG retrieval system implementing hybrid search (FAISS dense vector embeddings combined with BM25 sparse keyword matching) and TF-IDF reranking, featuring SSE streaming tokens, source metadata citations, and LangSmith telemetry.',
+    tech: ['Python', 'FastAPI', 'LangChain', 'FAISS', 'BM25', 'Groq', 'LangSmith', 'RAGAS'],
+    github: 'https://github.com/tilakchow',
+    banner: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
+    stats: 'Hybrid Search',
+  },
+  {
     name: 'ChimtuDrop',
     desc: 'High-performance privacy-first mobile media downloader built with React Native (Expo) and FastAPI. Uses an isolated yt-dlp/FFmpeg extraction pipeline with SSRF protection, resolution selection, and local gallery storage without ads or trackers.',
     tech: ['React Native', 'Expo', 'TypeScript', 'Python', 'FastAPI', 'yt-dlp', 'FFmpeg', 'Docker'],
@@ -38,14 +46,6 @@ export const featuredProjects: ProjectData[] = [
     live: 'https://github.com/tilakchow/ChimtuDrop',
     bannerFit: 'contain',
     bannerBg: '#f8f9fe',
-  },
-  {
-    name: 'Enterprise RAG Chatbot',
-    desc: 'RAG retrieval system implementing hybrid search (FAISS dense vector embeddings combined with BM25 sparse keyword matching) and TF-IDF reranking, featuring SSE streaming tokens, source metadata citations, and LangSmith telemetry.',
-    tech: ['Python', 'FastAPI', 'LangChain', 'FAISS', 'BM25', 'Groq', 'LangSmith', 'RAGAS'],
-    github: 'https://github.com/tilakchow',
-    banner: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
-    stats: 'Hybrid Search',
   },
   {
     name: 'AI Support Ticket Triage Agent',

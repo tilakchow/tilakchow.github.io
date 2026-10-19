@@ -25,5 +25,3 @@ dist-ssr
 
 # Scratch / temporary analysis scripts
 scratch/
-*.html
-!index.html
