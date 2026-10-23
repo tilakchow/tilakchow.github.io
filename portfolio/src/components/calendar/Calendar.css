@@ -23,6 +23,63 @@
   -ms-overflow-style: none;
 }
 
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.calendar-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #a3a3a3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calendar-year-badge {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.calendar-year-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.calendar-year-btn {
+  background: #151617;
+  border: 1px solid #333;
+  color: #888;
+  font-size: 11px;
+  font-family: Figtree, sans-serif;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+}
+
+.calendar-year-btn:hover {
+  color: #fff;
+  border-color: #666;
+  background: #202224;
+}
+
+.calendar-year-btn.active {
+  color: #fff;
+  background: #26272b;
+  border-color: #888;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
+}
+
 .calendar-scroll-wrap {
   overflow-x: auto;
   overflow-y: hidden;
@@ -100,9 +157,23 @@
   }
 }
 
+@media (max-width: 480px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .calendar-year-pills {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 400px) {
   .calendar-container {
     margin: 12px auto;
     padding: 12px 16px;
   }
 }
+

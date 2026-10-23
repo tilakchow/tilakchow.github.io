@@ -8,10 +8,7 @@ interface ContributionDay {
 }
 
 interface ApiResponse {
-  total: {
-    [key: string]: number;
-    lastYear: number;
-  };
+  total: Record<string, number>;
   contributions: ContributionDay[];
 }
 
@@ -20,8 +17,10 @@ interface ApiResponse {
 const COLOR_LEVELS = ['#262626', '#4a4a4a', '#757575', '#a3a3a3', '#ffffff'];
 
 export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'tilakchow' }) => {
-  const [data, setData] = useState<ContributionDay[]>([]);
-  const [totalCount, setTotalCount] = useState<number | null>(null);
+  const [allContributions, setAllContributions] = useState<ContributionDay[]>([]);
+  const [totalMap, setTotalMap] = useState<Record<string, number>>({});
+  const [availableYears, setAvailableYears] = useState<string[]>([]);
+  const [selectedYear, setSelectedYear] = useState<string>(() => new Date().getFullYear().toString());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
@@ -30,15 +29,30 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
     let isMounted = true;
     setLoading(true);
 
-    fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
+    // Fetch all contributions to allow year-by-year filtering starting from January
+    fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch contributions');
         return res.json() as Promise<ApiResponse>;
       })
       .then((resData) => {
         if (!isMounted) return;
-        setData(resData.contributions || []);
-        setTotalCount(resData.total?.lastYear ?? resData.contributions.reduce((acc, c) => acc + c.count, 0));
+        const contributions = resData.contributions || [];
+        const totals = resData.total || {};
+
+        const yearsFromTotal = Object.keys(totals).filter((k) => /^\d{4}$/.test(k));
+        const yearsFromContribs = Array.from(
+          new Set(contributions.map((c) => c.date.slice(0, 4)))
+        );
+        const combinedYears = Array.from(new Set([...yearsFromTotal, ...yearsFromContribs])).sort(
+          (a, b) => Number(b) - Number(a)
+        );
+
+        setAllContributions(contributions);
+        setTotalMap(totals);
+        setAvailableYears(combinedYears);
+
+        setSelectedYear((prev) => (combinedYears.includes(prev) ? prev : combinedYears[0] || prev));
         setLoading(false);
       })
       .catch((err) => {
@@ -53,45 +67,63 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
     };
   }, [username]);
 
+  // Contributions for the selected year, ordered Jan 1 -> Dec 31
+  const yearData = useMemo(() => {
+    if (!allContributions || allContributions.length === 0) return [];
+    return allContributions
+      .filter((c) => c.date.startsWith(selectedYear))
+      .sort((a, b) => a.date.localeCompare(b.date));
+  }, [allContributions, selectedYear]);
+
+  // Total count for the selected year
+  const yearTotal = useMemo(() => {
+    if (totalMap[selectedYear] !== undefined) {
+      return totalMap[selectedYear];
+    }
+    return yearData.reduce((acc, c) => acc + c.count, 0);
+  }, [totalMap, selectedYear, yearData]);
+
   // Organize contributions into weeks (columns) of 7 days (rows)
   const { weeks, monthLabels } = useMemo(() => {
-    if (!data || data.length === 0) return { weeks: [], monthLabels: [] };
+    if (!yearData || yearData.length === 0) return { weeks: [], monthLabels: [] };
 
-    // Align start to the preceding Sunday or Monday if needed
-    const firstDate = new Date(data[0].date);
+    // Align start to the preceding Sunday using local calendar date
+    const [y, m, d] = yearData[0].date.split('-').map(Number);
+    const firstDate = new Date(y, m - 1, d);
     const dayOfWeek = firstDate.getDay(); // 0 is Sunday
-    const padded: (ContributionDay | null)[] = [...Array(dayOfWeek).fill(null), ...data];
+    const padded: (ContributionDay | null)[] = [...Array(dayOfWeek).fill(null), ...yearData];
 
     const computedWeeks: (ContributionDay | null)[][] = [];
     for (let i = 0; i < padded.length; i += 7) {
       computedWeeks.push(padded.slice(i, i + 7));
     }
 
-    // Determine month labels
+    // Determine month labels (starts with Jan for the calendar year)
     const labels: { xIndex: number; name: string }[] = [];
     let lastMonth = -1;
 
     computedWeeks.forEach((week, wIndex) => {
-      const validDay = week.find((d) => d !== null);
+      const validDay = week.find((item) => item !== null);
       if (validDay) {
-        const d = new Date(validDay.date);
-        const m = d.getMonth();
-        if (m !== lastMonth) {
-          lastMonth = m;
-          const monthName = d.toLocaleString('en-US', { month: 'short' });
+        const [dayY, dayM, dayD] = validDay.date.split('-').map(Number);
+        const dayDate = new Date(dayY, dayM - 1, dayD);
+        const monthNum = dayDate.getMonth();
+        if (monthNum !== lastMonth) {
+          lastMonth = monthNum;
+          const monthName = dayDate.toLocaleString('en-US', { month: 'short' });
           labels.push({ xIndex: wIndex, name: monthName });
         }
       }
     });
 
-    // Filter labels too close together
+    // Filter labels that are placed too closely
     const filteredLabels = labels.filter((lbl, idx, arr) => {
-      if (idx === 0 && arr.length > 1 && arr[1].xIndex - lbl.xIndex < 3) return false;
+      if (idx === 0 && arr.length > 1 && arr[1].xIndex - lbl.xIndex < 2) return false;
       return true;
     });
 
     return { weeks: computedWeeks, monthLabels: filteredLabels };
-  }, [data]);
+  }, [yearData]);
 
   const blockSize = 11;
   const blockGap = 3.5;
@@ -115,6 +147,28 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
 
   return (
     <div className="calendar-container">
+      {/* Header with year selection */}
+      <div className="calendar-header">
+        <div className="calendar-title">
+          Contributions in <span className="calendar-year-badge">{selectedYear}</span>
+        </div>
+        {availableYears.length > 1 && (
+          <div className="calendar-year-pills">
+            {availableYears.map((yr) => (
+              <button
+                key={yr}
+                type="button"
+                className={`calendar-year-btn ${yr === selectedYear ? 'active' : ''}`}
+                onClick={() => setSelectedYear(yr)}
+                aria-label={`View contributions for ${yr}`}
+              >
+                {yr}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="calendar-scroll-wrap">
         <svg
           width={totalSvgWidth}
@@ -158,7 +212,8 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
                       style={{ cursor: 'pointer', transition: 'stroke 0.15s ease' }}
                       onMouseEnter={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
-                        const formattedDate = new Date(day.date).toLocaleDateString('en-US', {
+                        const [dy, dm, dd] = day.date.split('-').map(Number);
+                        const formattedDate = new Date(dy, dm - 1, dd).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric',
                           year: 'numeric',
@@ -182,7 +237,7 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
       {/* Footer count and legend */}
       <div className="calendar-footer">
         <div className="calendar-count">
-          This year, I achieved {totalCount ?? 0} contributions
+          In {selectedYear}, I achieved {yearTotal} contribution{yearTotal === 1 ? '' : 's'}
         </div>
         <div className="calendar-legend">
           <span className="calendar-legend-label">Less</span>

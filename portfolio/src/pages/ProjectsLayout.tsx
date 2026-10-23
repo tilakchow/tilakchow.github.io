@@ -4,7 +4,7 @@ import { SectionTitle } from '../components/common/Common';
 import { Footer } from '../components/footer/Footer';
 import { ProjectCard } from '../components/projects/ProjectCard';
 import { allProjects } from '../data/projects';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaGithub } from 'react-icons/fa';
 
 export const ProjectsLayout: React.FC = () => {
   useEffect(() => {
@@ -20,11 +20,33 @@ export const ProjectsLayout: React.FC = () => {
           <ProjectCard key={project.name} {...project} />
         ))}
 
-        <div className="view-all-projects" style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '32px', marginBottom: '24px' }}>
+        <div
+          className="view-all-projects"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: '32px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
           <Link to="/" className="view-all-btn" aria-label="back to home">
             <FaArrowLeft className="arrow-icon" style={{ marginRight: '6px' }} size={12} />
             <span>Back to Home</span>
           </Link>
+
+          <a
+            href="https://github.com/tilakchow?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="view-all-btn"
+            aria-label="View on GitHub"
+          >
+            <FaGithub className="arrow-icon" style={{ marginRight: '6px' }} size={13} />
+            <span>View All on GitHub</span>
+          </a>
         </div>
       </section>
       <Footer />
