@@ -48,15 +48,15 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
     };
   }, [username]);
 
-  // Contributions starting from October 2026 onwards
+  // Filter contributions for the year 2026
   const contributionData = useMemo(() => {
     if (!allContributions || allContributions.length === 0) return [];
     return allContributions
-      .filter((c) => c.date >= '2026-10-01')
+      .filter((c) => c.date.startsWith('2026'))
       .sort((a, b) => a.date.localeCompare(b.date));
   }, [allContributions]);
 
-  // Total count since October 2026
+  // Total count in 2026
   const totalContributions = useMemo(() => {
     return contributionData.reduce((acc, c) => acc + c.count, 0);
   }, [contributionData]);
@@ -134,10 +134,9 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
 
       <div className="calendar-scroll-wrap">
         <svg
-          width={totalSvgWidth}
-          height={totalSvgHeight}
           className="calendar-svg"
           viewBox={`0 0 ${totalSvgWidth} ${totalSvgHeight}`}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
         >
           {/* Month labels */}
           <g className="calendar-months">
@@ -200,7 +199,7 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
       {/* Footer count and legend */}
       <div className="calendar-footer">
         <div className="calendar-count">
-          Achieved {totalContributions} contribution{totalContributions === 1 ? '' : 's'} since October 2026
+          In 2026, I achieved {totalContributions} contribution{totalContributions === 1 ? '' : 's'}
         </div>
         <div className="calendar-legend">
           <span className="calendar-legend-label">Less</span>
