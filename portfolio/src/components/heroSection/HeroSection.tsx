@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Tooltip } from '../common/Common';
 import { FaHeart } from 'react-icons/fa';
 import { LuMapPin } from 'react-icons/lu';
-import { HiUser, HiQrCode } from 'react-icons/hi2';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FaLinkedin } from 'react-icons/fa';
 import { socialLinks } from '../../data/socialLinks';
@@ -44,8 +43,8 @@ export const HeroSection: React.FC = () => {
   };
 
   const avatarUrl = '/images/profile/avatar.png';
-  // Generates clean email QR code matching Manixh dimensions & style (black QR dots on crisp white rounded card)
-  const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto:tilakchowdary18@gmail.com&color=000000&bgcolor=ffffff';
+  // Generates clean X (Twitter) profile QR code (black QR dots on crisp white rounded card)
+  const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fx.com%2Ftilakchow_&color=000000&bgcolor=ffffff';
 
   return (
     <div className="hero-section-banner-outer">
@@ -54,6 +53,17 @@ export const HeroSection: React.FC = () => {
         <div className="hero-section-avatar-wrapper">
           <div
             className="user-image hero-section-avatar"
+            onClick={toggleQr}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleQr();
+              }
+            }}
+            aria-label={showQr ? 'Show Profile Photo' : 'Show Twitter QR Code'}
+            title={showQr ? 'Click to show Profile Photo' : 'Click to show Twitter QR Code'}
             style={{
               overflow: 'hidden',
               borderRadius: '16px',
@@ -64,11 +74,14 @@ export const HeroSection: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
+              cursor: 'pointer',
+              userSelect: 'none',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
           >
             <img
               src={showQr ? qrUrl : avatarUrl}
-              alt={showQr ? 'Scan QR Code to Email' : 'Tilak Chowdary'}
+              alt={showQr ? 'Scan QR Code to visit X (Twitter) Profile' : 'Tilak Chowdary'}
               style={{
                 width: '100%',
                 height: '100%',
@@ -76,34 +89,9 @@ export const HeroSection: React.FC = () => {
                 display: 'block',
                 borderRadius: showQr ? '8px' : '12px',
                 transition: 'all 0.25s ease',
+                pointerEvents: 'none',
               }}
             />
-            <button
-              className="qr-toggle-btn"
-              onClick={toggleQr}
-              aria-label={showQr ? 'Show Profile Photo' : 'Show Contact QR Code'}
-              title={showQr ? 'Show Profile Photo' : 'Show Contact QR Code'}
-              style={{
-                position: 'absolute',
-                top: '6px',
-                right: '6px',
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
-                backgroundColor: showQr ? '#1f1f23' : '#1a1b1c',
-                border: '1.5px solid #333',
-                color: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                zIndex: 10,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
-                padding: 0,
-              }}
-            >
-              {showQr ? <HiUser size={15} /> : <HiQrCode size={15} />}
-            </button>
           </div>
         </div>
 
