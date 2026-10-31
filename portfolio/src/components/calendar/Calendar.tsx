@@ -22,41 +22,62 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
   const [error, setError] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; text: string } | null>(null);
 
+  const currentYear = useMemo(() => new Date().getFullYear().toString(), []);
+
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
 
-    fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch contributions');
-        return res.json() as Promise<ApiResponse>;
-      })
-      .then((resData) => {
+    const fetchContributions = async () => {
+      try {
+        // Query current year directly to bypass stale cached whole-archive responses
+        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=${currentYear}`);
+        if (!res.ok) throw new Error('Primary API failed');
+        const resData: ApiResponse = await res.json();
         if (!isMounted) return;
         setAllContributions(resData.contributions || []);
         setLoading(false);
-      })
-      .catch((err) => {
-        if (!isMounted) return;
-        console.error('Error fetching github contributions:', err);
-        setError('Unable to load GitHub contributions');
-        setLoading(false);
-      });
+      } catch (err) {
+        console.warn('Primary contributions API failed, trying fallback API:', err);
+        try {
+          // Fallback to Vercel GitHub contributions endpoint if primary is down
+          const fallbackRes = await fetch(`https://github-contributions.vercel.app/api/v1/${username}`);
+          if (!fallbackRes.ok) throw new Error('Fallback API failed');
+          const fallbackData = await fallbackRes.json();
+          if (!isMounted) return;
+          const mapped: ContributionDay[] = (fallbackData.contributions || [])
+            .map((c: { date: string; count: number; intensity?: string; level?: number }) => ({
+              date: c.date,
+              count: c.count,
+              level: c.level !== undefined ? c.level : (Number(c.intensity) || 0),
+            }));
+          setAllContributions(mapped);
+          setLoading(false);
+        } catch (fallbackErr) {
+          if (!isMounted) return;
+          console.error('Error fetching github contributions:', fallbackErr);
+          setError('Unable to load GitHub contributions');
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchContributions();
 
     return () => {
       isMounted = false;
     };
-  }, [username]);
+  }, [username, currentYear]);
 
-  // Filter contributions for the year 2026
+  // Filter contributions for the current year
   const contributionData = useMemo(() => {
     if (!allContributions || allContributions.length === 0) return [];
     return allContributions
-      .filter((c) => c.date.startsWith('2026'))
+      .filter((c) => c.date.startsWith(currentYear))
       .sort((a, b) => a.date.localeCompare(b.date));
-  }, [allContributions]);
+  }, [allContributions, currentYear]);
 
-  // Total count in 2026
+  // Total count in current year
   const totalContributions = useMemo(() => {
     return contributionData.reduce((acc, c) => acc + c.count, 0);
   }, [contributionData]);
@@ -199,7 +220,7 @@ export const GitHubCalendar: React.FC<{ username?: string }> = ({ username = 'ti
       {/* Footer count and legend */}
       <div className="calendar-footer">
         <div className="calendar-count">
-          In 2026, I achieved {totalContributions} contribution{totalContributions === 1 ? '' : 's'}
+          In {currentYear}, I achieved {totalContributions} contribution{totalContributions === 1 ? '' : 's'}
         </div>
         <div className="calendar-legend">
           <span className="calendar-legend-label">Less</span>
