@@ -5,7 +5,7 @@ import { Footer } from '../components/footer/Footer';
 import { FaDownload, FaArrowLeft } from 'react-icons/fa';
 import './ResumeLayout.css';
 
-const RESUME_URL = '/resume.pdf';
+const RESUME_URL = '/resume.pdf?v=2';
 const MOBILE_QUERY = '(max-width: 700px)';
 const DEFAULT_ASPECT = 612 / 792;
 const EXTRA_PADDING = 44;
