@@ -138,9 +138,10 @@ export const Experience: React.FC = () => {
             logoUrl="/images/companies/edusync.jpg"
             links={[{ url: 'https://edusync.in' }]}
             description={[
-              'Conducting rigorous validation and stress-testing of AI-integrated ERP modules, specifically LLM-powered workflows, identifying critical edge cases and reducing pre-release defects.',
-              'Partnering with cross-functional product and engineering teams to document technical requirements, verify AI feature behavior, and accelerate intelligent workflow automation deployment.',
-              'Engineered an internal AI support-ticket triage prototype using Python, FastAPI, pgvector, and LLM APIs to automate categorization and reduce manual triage time.',
+              'Working on AI-integrated modules of a SaaS school/college ERP with 8+ modules (fees, fines, concessions, timetables, homework, notices, events) used by 100+ institutions.',
+              'Validated and stress-tested the in-app RAG assistant and LLM workflows using a 64-query test set across 4 language modes (English, Telugu, Hindi, Tenglish), covering ambiguous and out-of-scope queries.',
+              'Reported LLM failure cases (wrong navigation, hallucinated answers, missing knowledge) to developers, supporting prompt and knowledge-base improvements.',
+              'Worked with the support team to convert common client issues from calls into test scenarios for AI features.',
             ]}
             isExpanded={expandedId === 1}
             onToggle={() => setExpandedId(expandedId === 1 ? null : 1)}

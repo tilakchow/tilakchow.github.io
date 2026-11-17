@@ -29,6 +29,14 @@ export const featuredProjects: ProjectData[] = [
     bannerBg: '#090d16',
   },
   {
+    name: 'Refund Agent – Agentic Evals with DeepEval',
+    desc: 'Autonomous tool-calling refund agent (Gemini 3.5 Flash Lite, LangChain, InMemorySaver checkpointer) orchestrating purchase history, 30-day refund eligibility verification, and automated ticket issuance. Rigorously evaluated with DeepEval across 7 trace-level and single-turn metrics, boosting pass rate from 57% to 100%.',
+    tech: ['Python', 'LangChain', 'Gemini API', 'DeepEval', 'Agentic Workflows', 'Tool Calling'],
+    github: 'https://github.com/tilakchow/RefundAgent',
+    banner: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    stats: 'DeepEval (100% Pass)',
+  },
+  {
     name: 'Enterprise RAG Chatbot',
     desc: 'RAG retrieval system implementing hybrid search (FAISS dense vector embeddings combined with BM25 sparse keyword matching) and TF-IDF reranking, featuring SSE streaming tokens, source metadata citations, and LangSmith telemetry.',
     tech: ['Python', 'FastAPI', 'LangChain', 'FAISS', 'BM25', 'Groq', 'LangSmith', 'RAGAS'],
@@ -46,14 +54,6 @@ export const featuredProjects: ProjectData[] = [
     live: 'https://github.com/tilakchow/ChimtuDrop',
     bannerFit: 'contain',
     bannerBg: '#f8f9fe',
-  },
-  {
-    name: 'AI Support Ticket Triage Agent',
-    desc: 'Intelligent support ticket categorization engine utilizing LLM structured outputs (Pydantic), pgvector semantic similarity search over historical resolution logs, and confidence-calibrated human escalation guardrails.',
-    tech: ['Python', 'FastAPI', 'pgvector', 'OpenAI API', 'RAGAS', 'PostgreSQL'],
-    github: 'https://github.com/tilakchow',
-    banner: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
-    stats: 'Semantic Triage',
   },
 ];
 
