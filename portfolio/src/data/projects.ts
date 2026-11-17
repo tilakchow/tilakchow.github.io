@@ -33,8 +33,10 @@ export const featuredProjects: ProjectData[] = [
     desc: 'Autonomous tool-calling refund agent (Gemini 3.5 Flash Lite, LangChain, InMemorySaver checkpointer) orchestrating purchase history, 30-day refund eligibility verification, and automated ticket issuance. Rigorously evaluated with DeepEval across 7 trace-level and single-turn metrics, boosting pass rate from 57% to 100%.',
     tech: ['Python', 'LangChain', 'Gemini API', 'DeepEval', 'Agentic Workflows', 'Tool Calling'],
     github: 'https://github.com/tilakchow/RefundAgent',
-    banner: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    banner: '/images/projects/refund_agent_flow.jpg',
     stats: 'DeepEval (100% Pass)',
+    bannerFit: 'contain',
+    bannerBg: '#090d16',
   },
   {
     name: 'Enterprise RAG Chatbot',
@@ -59,46 +61,12 @@ export const featuredProjects: ProjectData[] = [
 
 export const additionalProjects: ProjectData[] = [
   {
-    name: 'Mana Songs (తెలుగు మాస్ Jukebox)',
-    desc: 'Interactive Telugu music streaming web player and realtime jukebox powered by a Supabase cloud backend. Features live listener metrics, responsive audio controls, persistent song catalogue, and continuous playback.',
-    tech: ['JavaScript', 'HTML5', 'CSS3', 'Supabase', 'Realtime Audio', 'Vercel'],
-    github: 'https://github.com/tilakchow/Mana-Songs',
-    live: 'https://mana-songs-roan.vercel.app',
-    banner: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
-    stats: 'Supabase Realtime',
-  },
-  {
-    name: 'AI/ML Engineering Journey',
-    desc: 'Comprehensive structured curriculum and open-source implementation repository documenting deep progression in Machine Learning, Deep Learning, Generative AI, DSA, and mathematical foundations.',
-    tech: ['Python', 'Machine Learning', 'Deep Learning', 'GenAI', 'DSA', 'Mathematics'],
-    github: 'https://github.com/tilakchow/ai-ml-engineering-journey',
-    banner: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80',
-    stats: 'Curriculum & Code',
-  },
-  {
-    name: 'Personal Developer Portfolio',
-    desc: 'Personal portfolio website built with React 19, TypeScript, and Vite. Features a custom GitHub contributions heatmap with multi-year support, interactive experience timeline, and project showcase directory.',
-    tech: ['React 19', 'TypeScript', 'Vite', 'CSS3', 'GitHub API'],
-    github: 'https://github.com/tilakchow/tilakchow.github.io',
-    live: 'https://tilakchow.github.io',
-    banner: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    stats: 'React 19 + Vite',
-  },
-  {
     name: 'IoT-Based Driver Alertness System',
     desc: 'Published and presented at the ICISAS 2025 Conference in Dubai. Real-time vision-based fatigue detection system monitoring ocular closure and head pose to trigger automated safety alerts.',
     tech: ['Python', 'OpenCV', 'Deep Learning', 'IoT', 'Embedded Systems'],
     github: 'https://github.com/tilakchow',
     banner: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
     stats: 'ICISAS 2025 Dubai',
-  },
-  {
-    name: 'Android Compose Architecture Suite',
-    desc: 'Native Android application built with Kotlin, Jetpack Compose, Coroutines, and MVVM clean architecture, featuring local SQLite database caching with Room and asynchronous background processing.',
-    tech: ['Kotlin', 'Jetpack Compose', 'Coroutines', 'Room', 'Android SDK'],
-    github: 'https://github.com/tilakchow',
-    banner: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-    stats: 'Native Android',
   },
 ];
 
